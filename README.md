@@ -1,2 +1,2 @@
 # memory-card-game
-Memory Game
+A simple game to test memory. Built with React
