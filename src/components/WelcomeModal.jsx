@@ -1,4 +1,5 @@
 
+//should this be a shared function
 function closeModal (){
     document.querySelector('#welcome-modal').style.display = 'none';
 }
