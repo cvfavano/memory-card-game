@@ -19,7 +19,8 @@ function WelcomeModal({clickHandler}) {
             <p>Welcome!</p>
             <h2>Game Play</h2>
             <p>Instructions here</p>
-            <button id='start-game' type='button' onClick={clickHandler}>Let`&lsquo;`s Go</button>
+            {/* why linting error */}
+            <button id='start-game' type='button' onClick={clickHandler}>Let's Go</button>
             </div>
 
             </div>
