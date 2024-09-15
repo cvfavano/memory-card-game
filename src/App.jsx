@@ -1,4 +1,4 @@
-import { useState }  from 'react'
+import { useState, useEffect }  from 'react'
 import WelcomeModal from './components/WelcomeModal'
 import GameOverModal from './components/GameOverModal.jsx';
 import PropTypes from 'prop-types';
@@ -28,7 +28,7 @@ function useGameOver() {
   //this could be shared also(?)
   function toggleModal() {
     document.querySelector('#game-over-modal').style.display = 'block';
-    setIsGameOver(true)
+   // setIsGameOver(true)
   }
   return {isGameOver, toggleModal}
 }
