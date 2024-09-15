@@ -1,7 +1,10 @@
 import { useState }  from 'react'
 import WelcomeModal from './components/WelcomeModal'
+import PropTypes from 'prop-types';
 
-
+useWelcome.PropTypes = { 
+  isWelcomeModal: PropTypes.bool.isRequired
+}
 
 function useWelcome() {
   const [isWelcomeModal, setWelcomeModal ] = useState(true) 

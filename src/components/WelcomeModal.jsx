@@ -4,9 +4,13 @@ function closeModal (){
 }
 
 
+
+//why is this not valid {clickHandler}
 function WelcomeModal({clickHandler}) {
 
     return (
+
+        //should this be hardcoded instead of component?
         <div>
             <div id="welcome-modal" className="modal">
 
@@ -15,7 +19,7 @@ function WelcomeModal({clickHandler}) {
             <p>Welcome!</p>
             <h2>Game Play</h2>
             <p>Instructions here</p>
-            <button id='start-game' type='button' onClick={clickHandler}>Let's Go</button>
+            <button id='start-game' type='button' onClick={clickHandler}>Let`&lsquo;`s Go</button>
             </div>
 
             </div>
