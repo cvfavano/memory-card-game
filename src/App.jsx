@@ -1,12 +1,25 @@
-//import  useState  from 'react'
+import { useState }  from 'react'
 import WelcomeModal from './components/WelcomeModal'
 
 
 
+function useWelcome() {
+  const [isWelcomeModal, setWelcomeModal ] = useState(true) 
+
+  
+  function toggleWelcomeModal() {
+    document.querySelector('#welcome-modal').style.display = 'none';
+        setWelcomeModal(false)
+  }
+  return {isWelcomeModal, toggleWelcomeModal}
+}
+
+
 function App() {
+  const { toggleWelcomeModal} = useWelcome();
   return(
     <div>
-      <WelcomeModal />
+      <WelcomeModal clickHandler={toggleWelcomeModal}/>
     </div>
     )
 }
