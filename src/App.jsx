@@ -14,24 +14,23 @@ function usePokemonData() {
   const [pokemonList, setPokemonList] = useState([{}])
 
 
-  function getData() {
-  console.log(localStorage.pokemon.length)
+  // function getData() {
+  // console.log(localStorage.pokemon.length)
 
-  }
-  getData();
+  // }
+  // getData();
   useEffect( () => {
     console.log(window.localStorage.length)
 
-    const isPokemonListPresent = localStorage.getItem('pokemon')
+    setPokemonList(localStorage.getItem('pokemon'))
   
-    if( isPokemonListPresent == null ){
+    if( pokemonList == null ){
   
       fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=300")
         .then(response => response.json())
-        //is this ok?
         .then(result => {
-          setPokemonList(result)
           localStorage.setItem( "pokemon", JSON.stringify(result.results)) 
+          setPokemonList( localStorage.getItem('pokemon'))
         })
         .catch(error => console.log('error', error))   
     }    
