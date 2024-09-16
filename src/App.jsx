@@ -13,23 +13,31 @@ useWelcome.PropTypes = {
 function usePokemonData() {
   const [pokemonList, setPokemonList] = useState([{}])
 
+
+  function getData() {
+  console.log(localStorage.pokemon.length)
+
+  }
+  getData();
   useEffect( () => {
-    if( window.localStorage.length === 0 ){
-      console.log('hi')
+    console.log(window.localStorage.length)
+
+    const isPokemonListPresent = localStorage.getItem('pokemon')
+  
+    if( isPokemonListPresent == null ){
+  
       fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=300")
         .then(response => response.json())
         //is this ok?
         .then(result => {
           setPokemonList(result)
-
-
-      //    "pokemon", JSON.stringify(result)
-         localStorage.setItem( "pokemon", JSON.stringify(result.results)) 
+          localStorage.setItem( "pokemon", JSON.stringify(result.results)) 
         })
         .catch(error => console.log('error', error))   
     }    
+
   },[])
-  return {pokemonList}
+  return { pokemonList }
 }
 
 
@@ -65,7 +73,7 @@ function App() {
   return(
     <div>
       <WelcomeModal clickHandler={toggleWelcomeModal}/>
-    <Cards data = { pokemonList } />
+      <Cards data = { pokemonList } />
       <GameOverModal clickHandler = {toggleModal}/>
     </div>
     )
