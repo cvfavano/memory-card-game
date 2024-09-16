@@ -1,6 +1,7 @@
 import { useState, useEffect }  from 'react'
 import WelcomeModal from './components/WelcomeModal'
-import GameOverModal from './components/GameOverModal.jsx';
+import GameOverModal from './components/GameOverModal.jsx'
+import Cards from './components/Cards.jsx'
 import PropTypes from 'prop-types';
 
 useWelcome.PropTypes = { 
@@ -23,7 +24,7 @@ function usePokemonData() {
 
 
       //    "pokemon", JSON.stringify(result)
-         localStorage.setItem( "pokemon", JSON.stringify(result)) 
+         localStorage.setItem( "pokemon", JSON.stringify(result.results)) 
         })
         .catch(error => console.log('error', error))   
     }    
@@ -58,11 +59,13 @@ function useGameOver() {
 function App() {
   //maybe merge into useModal hook
   const { toggleWelcomeModal} = useWelcome();
-  const { toggleModal}  = useGameOver();
+
+  const { pokemonList } = usePokemonData();
+  const { toggleModal }  = useGameOver();
   return(
     <div>
       <WelcomeModal clickHandler={toggleWelcomeModal}/>
-
+    <Cards data = { pokemonList } />
       <GameOverModal clickHandler = {toggleModal}/>
     </div>
     )
