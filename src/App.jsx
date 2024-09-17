@@ -28,7 +28,7 @@ function usePokemonData() {
     setPokemonList(parsedData)
     console.log(pokemonList)
     
-   if( pokemonList.length === 1 || pokemonList.length == null){
+   if( pokemonList.length === 1 ){
   
       fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=300")
         .then(response => response.json()) 
