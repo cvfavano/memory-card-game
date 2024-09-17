@@ -18,18 +18,27 @@ function usePokemonData() {
   // console.log(localStorage.pokemon.length)
 
   // }
-  // getData();
-  useEffect( () => {
-    console.log(window.localStorage.length)
+  // getData(); 
+  // setPokemonList(localStorage.getItem('pokemon'))
+  //console.log(pokemonList)
 
-    setPokemonList(localStorage.getItem('pokemon'))
-  
-    if( pokemonList == null ){
+  useEffect( () => {
+    const data = localStorage.getItem('pokemon')
+    const parsedData = JSON.parse(data)
+    setPokemonList(parsedData)
+    console.log(pokemonList)
+    
+   if( pokemonList.length === 1 || pokemonList.length == null){
   
       fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=300")
-        .then(response => response.json())
-        .then(result => {
-          localStorage.setItem( "pokemon", JSON.stringify(result.results)) 
+        .then(response => response.json()) 
+        
+        .then(response => {
+       //   console.log(response.results.json())
+         JSON.stringify(response.results)
+
+         //loop through array and stringify the key
+          localStorage.setItem( "pokemon", JSON.stringify(response.results))
           setPokemonList( localStorage.getItem('pokemon'))
         })
         .catch(error => console.log('error', error))   
@@ -53,6 +62,7 @@ function useWelcome() {
 }
 
 function useGameOver() {
+  // eslint-disable-next-line no-unused-vars
   const [isGameOver, setIsGameOver ] = useState(false) 
 
   //this could be shared also(?)
@@ -73,6 +83,11 @@ function App() {
     <div>
       <WelcomeModal clickHandler={toggleWelcomeModal}/>
       <Cards data = { pokemonList } />
+      {/* <Cards data = { pokemonList } />
+      <Cards data = { pokemonList } />
+      <Cards data = { pokemonList } />
+      <Cards data = { pokemonList } />
+      <Cards data = { pokemonList } /> */}
       <GameOverModal clickHandler = {toggleModal}/>
     </div>
     )
