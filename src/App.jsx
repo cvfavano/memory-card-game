@@ -13,19 +13,22 @@ useWelcome.PropTypes = {
 function usePokemonData() {
   const [pokemonList, setPokemonList] = useState([{}])
 
-
+  //is this necessary, breaking out in another function
    function getData() {
     const data = localStorage.getItem('pokemon')
     const parsedData = JSON.parse(data)
-    setPokemonList(parsedData);
-    return true;
-   }
+
+    if(parsedData != null) {
+      setPokemonList(parsedData)
+      return true
+    }
+  }
+
   useEffect( () => {
-    const parsedData = getData();
-    
+    const isDataLocalStorage = getData();
 
     //check parsedData, as useState doesnt update instantly
-   if(parsedData == null ){
+   if(!isDataLocalStorage ){
       fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=300")
         .then(response => response.json()) 
         
@@ -33,7 +36,7 @@ function usePokemonData() {
        //   console.log(response.results.json())
          JSON.stringify(response.results)
 
-         //loop through array and stringify the key
+        
           localStorage.setItem( "pokemon", JSON.stringify(response.results))
           setPokemonList( localStorage.getItem('pokemon'))
         })
