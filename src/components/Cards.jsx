@@ -2,7 +2,7 @@ import {useState} from 'react';
 
 //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1000.png
 function Cards(props) {
-console.log(props.data)
+console.log(props.data[0]) //bulbasaur
     if (props.data.length != 1 ){
         const [pokemonNumber, setPokemonNumber] = useState(0);
         console.log(props)
