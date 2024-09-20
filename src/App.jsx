@@ -10,6 +10,7 @@ useWelcome.PropTypes = {
   isGameOver: PropTypes.bool.isRequired,
   setIsGameOver: PropTypes.bool.isRequired
 }
+
 function usePokemonData() {
   const [pokemonList, setPokemonList] = useState([{}])
 
