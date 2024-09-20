@@ -27,12 +27,12 @@ function Cards(props) {
             const num = getRandomInt(0, props.data.length)
    
             return (
-                <div>
+                <div className="card">
                   <img 
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${num}.png`} 
                     alt={`Pokemon ${props.data[num-1].name}`} 
                   />
-                  <p>{`Pokemon ${num-1}`}</p>
+                  {/* <p>{`Pokemon ${num-1}`}</p> */}
                   <p>{`${props.data[num-1].name}`}</p>
                 </div>  
             )
