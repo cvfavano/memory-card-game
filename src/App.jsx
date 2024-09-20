@@ -10,20 +10,24 @@ useWelcome.PropTypes = {
   isGameOver: PropTypes.bool.isRequired,
   setIsGameOver: PropTypes.bool.isRequired
 }
+
 function usePokemonData() {
   const [pokemonList, setPokemonList] = useState([{}])
-
 
    function getData() {
     const data = localStorage.getItem('pokemon')
     const parsedData = JSON.parse(data)
-    setPokemonList(parsedData);
-    return true;
-   }
+
+    if (parsedData != null){
+      setPokemonList(parsedData)
+      return true
+    } 
+  }
+
   useEffect( () => {
     const parsedData = getData();
     
-
+  console.log(pokemonList)
     //check parsedData, as useState doesnt update instantly
    if(parsedData == null ){
       fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=300")
