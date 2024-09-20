@@ -98,6 +98,32 @@ button:focus-visible {
   cursor: pointer;
 }
 
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  justify-content: center;
+  gap: 30px 30px;
+
+}
+
+.card {
+  max-width: 24%;
+  background: black;
+  outline: 8px solid rgba(255, 255, 255, 0.87);
+  border-radius: 3px;
+  padding-top: 29px;
+
+}
+.card img {
+  display: block;
+  max-width: 40%;
+  margin: 0 auto;
+}
+
+.card p {
+  text-align: center;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -110,3 +136,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+

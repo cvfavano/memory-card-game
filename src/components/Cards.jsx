@@ -1,11 +1,18 @@
-import {useState} from 'react';
+
 
 //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1000.png
 function Cards(props) {
-console.log(props.data[0]) //bulbasaur
-    if (props.data.length != 1 ){
-        const [pokemonNumber, setPokemonNumber] = useState(0);
-        console.log(props)
+//console.log(props.data[0]) //bulbasaur
+//todo push to array for total number of cards, based on difficulty
+//loop through array to create card
+
+    console.log(props.data)
+    // eslint-disable-next-line react/prop-types
+    console.log(props.data.length)
+    // eslint-disable-next-line react/prop-types
+    if ( props.data !== null  && props.data.length > 1 ){
+        
+    //    console.log(pokemonNumber)
     
         function getRandomInt(min, max) {
             min = Math.ceil(min)
@@ -13,37 +20,36 @@ console.log(props.data[0]) //bulbasaur
 
             return Math.floor(Math.random() * (max-min + 1)) + min;
         }
-        //is this state?
-        // setPokemonNumber(getRandomInt(0,299))
 
         const createCard = () => {
-            //these numbers need to be dynamic
-            console.log(pokemonNumber)
-            const num = setPokemonNumber(getRandomInt(0,pokemonNumber.length))
-        //   const int = 1
-                const card = {
-                    image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + num + ".png",
-                    name: num
-        } 
-            
+        
+            // eslint-disable-next-line react/prop-types
+            const num = getRandomInt(0, props.data.length)
+   
+            return (
+                <div className="card">
+                  <img 
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${num}.png`} 
+                    alt={`Pokemon ${props.data[num-1].name}`} 
+                  />
+                  {/* <p>{`Pokemon ${num-1}`}</p> */}
+                  <p>{`${props.data[num-1].name}`}</p>
+                </div>  
+            )
+        }
+        //  console.log(props[createCard.name])
 
-         return card
-        
-        
+        return (
+            <div className="cards-container">
+                {createCard()}
+                {createCard()}
+                {createCard()}
+                {createCard()}
+                {createCard()}
+                {createCard()}
+            </div >
+        )
     }
-
-
-  //  console.log(props[createCard.name])
-
-    return (
-        <div>
-
-            <img src={`${createCard.image}`} />
-            {/* <p>{props.data[createCard.name].name}</p> */}
-         
-        </div >
-    )
-}
 }
 
 export default  Cards
