@@ -11,24 +11,21 @@ useWelcome.PropTypes = {
   setIsGameOver: PropTypes.bool.isRequired
 }
 
-function getRandomInt(min, max) {
-  min = Math.ceil(min)
-  max = Math.floor(max)
-
-  return Math.floor(Math.random() * (max-min + 1)) + min
-}
+/* Some notes:
+  1. monitor re-renders to identify when infinite renders.
+  2. simplify number of things that cause a re-render.
+  3. try not to have eslint errors or other errors.
+      if you disable them let others know to search for that they might want to look at those errors.
+*/
 
 function usePokemonData() {
-  const [pokemonList, setPokemonList] = useState([{}])
-
+  const [pokemonList, setPokemonList] = useState([])
+  const [isRandom, setIsRandom ] = useState(false)
+  
+  // const [randomPokemons, setRandomPokemons] = useState(new Set());
    function getData() {
     const data = localStorage.getItem('pokemon')
-    // const parsedData = JSON.parse(data)
     return data ? JSON.parse(data) : null
-    // if (parsedData != null){
-    //   setPokemonList(parsedData)
-    //   return true
-    // } 
   }
 
   useEffect( () => {
@@ -36,18 +33,12 @@ function usePokemonData() {
   
     if (parsedData){
       setPokemonList(parsedData)
-     // return true
     } 
-//  console.log(pokemonList)
-    //check parsedData, as useState doesnt update instantly
-   else{
+    else{
       fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=300")
         .then(response => response.json()) 
         
         .then(response => {
-       //   console.log(response.results.json())
-        // JSON.stringify(response.results)
-
          //loop through array and stringify the key
           localStorage.setItem( "pokemon", JSON.stringify(response.results))
           setPokemonList( localStorage.getItem('pokemon'))
@@ -55,7 +46,33 @@ function usePokemonData() {
         .catch(error => console.log('error', error))   
     }    
   },[])
-  return { pokemonList }
+
+  useEffect( () => {
+    const getRandomPokemon = (count) => {
+      // getting random 20
+      const selectedPokemon = new Set();
+    
+      while(selectedPokemon.size < count){
+        const number = Math.floor(Math.random() * pokemonList.length)
+        
+        const pokemon = pokemonList[number]
+        if(pokemon){
+          selectedPokemon.add(pokemon)
+        }
+        
+      }
+      // setRandomPokemons(selectedPokemon)
+      return Array.from(selectedPokemon)
+    }
+    if(pokemonList?.length > 0 && !isRandom) {
+      const listy = getRandomPokemon(20)
+      setIsRandom(true);
+      setPokemonList(listy);
+    }
+    
+  },[pokemonList, isRandom])
+
+  return { pokemonList, randomPokemons: pokemonList }
 }
 
 
@@ -83,12 +100,22 @@ function useGameOver() {
   return {isGameOver, toggleModal}
 }
 //rename this
-function useRandomNumbers() {
+// const getRandomPokemon = (count) => {
+//   const selectedPokemon = new Set();
+//   const [gamePokemon, setGamePokemon] = useState([{}])
+//   const { pokemonList } = usePokemonData()
 
-  // const [numbers, setNumbers] = useState([])
-  const [gamePokemon, setGamePokemon] = useState([{}])
-  const { pokemonList } = usePokemonData()
 
+//   while(selectedPokemon.size < count){
+//     const number = Math.floor(Math.random() * pokemonList.length)
+    
+//     const pokemon = pokemonList[number]
+//     if(pokemon){
+//       selectedPokemon.add(pokemon)
+//     }
+//   }
+//   setRandomPokemons(selectedPokemon)
+// }
   // useEffect(() => {
   //   const numbers = new Set()
 
@@ -100,50 +127,23 @@ function useRandomNumbers() {
   //   setNumbers(Array.from(numbers))
     
   // },[])
- console.log(pokemonList[0])
-
-  useEffect(() => {
-    const pokemons = new Set()
-   
-    while(pokemons.size < 20){
-      const number = getRandomInt(0,299)
-      console.log(number)
-      const pokemon = pokemonList[number]
-     
-      console.log({pokemon})
-      pokemons.add(pokemon)
-console.log(pokemons)
-    //  return
-    }
-//
-    setGamePokemon(Array.from(pokemons))
-
-//    setGamePokemon(gamePokemon[])
-  },[pokemonList])
-console.log(gamePokemon)
-  //set new array here for game pokemon
-  return gamePokemon
-}
-
 // //
 
 function App() {
   //maybe merge into useModal hook
   const { toggleWelcomeModal } = useWelcome()
  // const { numberList } = usePokemonGameList() 
-  const { pokemonList } = usePokemonData()
+  const { pokemonList, randomPokemons } = usePokemonData()
   const { toggleModal }  = useGameOver()
-  const gamePokemon = useRandomNumbers()
-
-
   
+  console.log('rendered 1')
   return(
     <div>
       <WelcomeModal clickHandler= { toggleWelcomeModal } />
       <Cards 
         data = { pokemonList }
        // num = { numberList }
-        game = {gamePokemon}
+        game = {randomPokemons}
      />
       {/* <Cards data = { pokemonList } />
       <Cards data = { pokemonList } />
