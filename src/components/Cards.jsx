@@ -1,12 +1,12 @@
 
 
-//https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1000.png
+// //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1000.png
 function Cards(props) {
 //console.log(props.data[0]) //bulbasaur
 //todo push to array for total number of cards, based on difficulty
 //loop through array to create card
 
-    console.log(props.data)
+   
     // eslint-disable-next-line react/prop-types
     console.log(props.data.length)
     // eslint-disable-next-line react/prop-types
@@ -18,7 +18,7 @@ function Cards(props) {
             min = Math.ceil(min)
             max = Math.floor(max)
 
-            return Math.floor(Math.random() * (max-min + 1)) + min;
+            return Math.floor(Math.random() * (max-min + 1)) + min
         }
 
         const createCard = () => {
