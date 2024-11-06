@@ -69,7 +69,7 @@ function usePokemonData() {
       setPokemonList(listy)
     }
   }, [pokemonList, isRandom])
-
+  //why is there 2 pokemonLists
   return { pokemonList, randomPokemons: pokemonList }
 }
 
@@ -126,25 +126,23 @@ function useGameOver() {
 
 function App() {
   const [mode, setMode] = useState(1)
+
+  const handleModeChange = (selectedMode) => {
+    setMode(selectedMode)
+  }
   //maybe merge into useModal hook
   const { toggleWelcomeModal } = useWelcome()
   // const { numberList } = usePokemonGameList()
   const { pokemonList, randomPokemons } = usePokemonData()
   const { toggleModal } = useGameOver()
-
+  console.log('App mode: ' + mode)
   return (
     <div>
       <WelcomeModal
         clickHandler={toggleWelcomeModal}
-        mode={mode}
-        setMode={() => setMode()}
+        onChange={handleModeChange} // was told this could be onchange={setMode}
       />
-      <Cards
-        data={pokemonList}
-        // num = { numberList }
-        game={randomPokemons}
-        mode={mode}
-      />
+      <Cards data={pokemonList} game={randomPokemons} mode={mode} />
       {/* <Cards data = { pokemonList } />
       <Cards data = { pokemonList } />
       <Cards data = { pokemonList } />

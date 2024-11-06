@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types'
 
-ModeSelector.PropTypes = {
+ModeSelector.propTypes = {
   mode: PropTypes.number.isRequired,
-  setMode: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
 }
 
-function ModeSelector({ mode, setMode }) {
-  console.log(mode)
-
+function ModeSelector({ mode, onChange }) {
+  console.log(onChange)
   const options = [
     { value: 1, label: 'Easy' },
     { value: 2, label: 'Medium' },
@@ -15,19 +14,21 @@ function ModeSelector({ mode, setMode }) {
   ]
 
   const handleChange = (event) => {
-    setMode(event.target.value)
+    onChange(event.target.value)
+    console.log(event.target.value)
+    console.log(onChange(event.target.value))
   }
 
   return (
     <div>
-      <select value={mode} onChange={handleChange}>
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
+      <select value={mode} onChange={handleChange} id="game-mode">
+        {options.map((option, index) => (
+          <option key={option.label + '-' + index} value={option.value}>
             {option.label}
           </option>
         ))}
       </select>
-      <p>Selected Value: {mode}</p>
+      {/* <p>Selected Value: {mode}</p> */}
     </div>
   )
 }

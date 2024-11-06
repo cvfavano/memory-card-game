@@ -7,18 +7,13 @@ function closeModal() {
 
 WelcomeModal.propTypes = {
   clickHandler: PropTypes.func.isRequired,
-  mode: PropTypes.number.isRequired,
-  setMode: PropTypes.func.isRequired,
+  // mode: PropTypes.number.isRequired,
+  onChange: PropTypes.func,
 }
 
 //why is this not valid {clickHandler}
-function WelcomeModal({ clickHandler, mode, setMode }) {
-  console.log(clickHandler)
-  console.log(mode)
-  console.log(setMode)
+function WelcomeModal({ clickHandler, onChange }) {
   return (
-    //should this be hardcoded instead of component?
-
     <div>
       <div id="welcome-modal" className="modal">
         <div className="modal-content">
@@ -28,9 +23,7 @@ function WelcomeModal({ clickHandler, mode, setMode }) {
           <p>Welcome!</p>
           <h2>Game Play</h2>
           <p>Instructions here</p>
-
-          <ModeSelector mode={mode} setMode={setMode} />
-          {/* why linting error */}
+          <ModeSelector onChange={onChange} />
           <button id="start-game" type="button" onClick={clickHandler}>
             Let&apos;s Go
           </button>
