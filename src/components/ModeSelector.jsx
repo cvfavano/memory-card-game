@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types'
 
 ModeSelector.propTypes = {
-  mode: PropTypes.number.isRequired,
+  mode: PropTypes.number,
   onChange: PropTypes.func,
 }
 
 function ModeSelector({ mode, onChange }) {
-  console.log(onChange)
   const options = [
     { value: 1, label: 'Easy' },
     { value: 2, label: 'Medium' },
@@ -14,9 +13,7 @@ function ModeSelector({ mode, onChange }) {
   ]
 
   const handleChange = (event) => {
-    onChange(event.target.value)
-    console.log(event.target.value)
-    console.log(onChange(event.target.value))
+    onChange(parseInt(event.target.value))
   }
 
   return (

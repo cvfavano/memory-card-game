@@ -4,13 +4,14 @@ import PropTypes from 'prop-types'
 Cards.propTypes = {
   data: PropTypes.array.isRequired,
   game: PropTypes.array.isRequired,
+  mode: PropTypes.number.isRequired,
 }
 
 function Cards(props) {
   //console.log(props.data[0]) //bulbasaur
   //todo push to array for total number of cards, based on difficulty
   //loop through array to create card
-
+  console.log(props.mode)
   if (props.data !== null && props.data?.length > 1) {
     //    console.log(pokemonNumber)
 

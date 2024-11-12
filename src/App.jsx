@@ -129,13 +129,16 @@ function App() {
 
   const handleModeChange = (selectedMode) => {
     setMode(selectedMode)
+    console.log(mode)
+    console.log(typeof mode)
   }
+
   //maybe merge into useModal hook
   const { toggleWelcomeModal } = useWelcome()
   // const { numberList } = usePokemonGameList()
   const { pokemonList, randomPokemons } = usePokemonData()
   const { toggleModal } = useGameOver()
-  console.log('App mode: ' + mode)
+
   return (
     <div>
       <WelcomeModal
