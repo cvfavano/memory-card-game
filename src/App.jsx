@@ -24,7 +24,7 @@ function usePokemonData() {
   const [isRandom, setIsRandom] = useState(false)
 
   //is this necessary, breaking out in another function
-   function getData() {
+  function getData() {
     const data = localStorage.getItem('pokemon')
     return data ? JSON.parse(data) : null
   }
@@ -32,27 +32,25 @@ function usePokemonData() {
   useEffect(() => {
     const parsedData = getData()
 
-    if(parsedData != null) {
+    if (parsedData != null) {
       setPokemonList(parsedData)
       return true
     }
-  }
-
-  useEffect( () => {
-    const isDataLocalStorage = getData();
+  })
+  useEffect(() => {
+    const isDataLocalStorage = getData()
 
     //check parsedData, as useState doesnt update instantly
-   if(!isDataLocalStorage ){
-      fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=300")
-        .then(response => response.json()) 
-        
-        .then(response => {
-       //   console.log(response.results.json())
-         JSON.stringify(response.results)
+    if (!isDataLocalStorage) {
+      fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=300')
+        .then((response) => response.json())
 
-        
-          localStorage.setItem( "pokemon", JSON.stringify(response.results))
-          setPokemonList( localStorage.getItem('pokemon'))
+        .then((response) => {
+          //   console.log(response.results.json())
+          JSON.stringify(response.results)
+
+          localStorage.setItem('pokemon', JSON.stringify(response.results))
+          setPokemonList(localStorage.getItem('pokemon'))
         })
         .catch((error) => console.log('error', error))
     }
