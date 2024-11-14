@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import WelcomeModal from './components/WelcomeModal'
 import GameOverModal from './components/GameOverModal.jsx'
 import Cards from './components/Cards.jsx'
-
 import PropTypes from 'prop-types'
 
 useWelcome.PropTypes = {
@@ -12,18 +11,10 @@ useWelcome.PropTypes = {
   setIsGameOver: PropTypes.bool.isRequired,
 }
 
-/* Some notes:
-  1. monitor re-renders to identify when infinite renders.
-  2. simplify number of things that cause a re-render.
-  3. try not to have eslint errors or other errors.
-      if you disable them let others know to search for that they might want to look at those errors.
-*/
-
 function usePokemonData() {
   const [pokemonList, setPokemonList] = useState([])
   const [isRandom, setIsRandom] = useState(false)
-
-  //is this necessary, breaking out in another function
+  // const [randomPokemons, setRandomPokemons] = useState(new Set());
   function getData() {
     const data = localStorage.getItem('pokemon')
     return data ? JSON.parse(data) : null
@@ -31,24 +22,13 @@ function usePokemonData() {
 
   useEffect(() => {
     const parsedData = getData()
-
-    if (parsedData != null) {
+    if (parsedData) {
       setPokemonList(parsedData)
-      return true
-    }
-  })
-  useEffect(() => {
-    const isDataLocalStorage = getData()
-
-    //check parsedData, as useState doesnt update instantly
-    if (!isDataLocalStorage) {
+    } else {
       fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=300')
         .then((response) => response.json())
-
         .then((response) => {
-          //   console.log(response.results.json())
-          JSON.stringify(response.results)
-
+          //loop through array and stringify the key
           localStorage.setItem('pokemon', JSON.stringify(response.results))
           setPokemonList(localStorage.getItem('pokemon'))
         })
@@ -60,10 +40,8 @@ function usePokemonData() {
     const getRandomPokemon = (count) => {
       // getting random 20
       const selectedPokemon = new Set()
-
       while (selectedPokemon.size < count) {
         const number = Math.floor(Math.random() * pokemonList.length)
-
         const pokemon = pokemonList[number]
         if (pokemon) {
           selectedPokemon.add(pokemon)
@@ -78,7 +56,7 @@ function usePokemonData() {
       setPokemonList(listy)
     }
   }, [pokemonList, isRandom])
-  //why is there 2 pokemonLists
+
   return { pokemonList, randomPokemons: pokemonList }
 }
 
@@ -112,7 +90,6 @@ function useGameOver() {
 
 //   while(selectedPokemon.size < count){
 //     const number = Math.floor(Math.random() * pokemonList.length)
-
 //     const pokemon = pokemonList[number]
 //     if(pokemon){
 //       selectedPokemon.add(pokemon)
@@ -127,7 +104,6 @@ function useGameOver() {
 //     let number = getRandomInt(0,299)
 //     numbers.add(number)
 //   }
-
 //   setNumbers(Array.from(numbers))
 
 // },[])
@@ -135,26 +111,28 @@ function useGameOver() {
 
 function App() {
   const [mode, setMode] = useState(1)
-
-  const handleModeChange = (selectedMode) => {
-    setMode(selectedMode)
-    console.log(mode)
-    console.log(typeof mode)
-  }
-
   //maybe merge into useModal hook
   const { toggleWelcomeModal } = useWelcome()
   // const { numberList } = usePokemonGameList()
   const { pokemonList, randomPokemons } = usePokemonData()
   const { toggleModal } = useGameOver()
 
+  function changeMode(number) {
+    setMode(number)
+  }
   return (
     <div>
       <WelcomeModal
         clickHandler={toggleWelcomeModal}
-        onChange={handleModeChange} // was told this could be onchange={setMode}
+        mode={mode}
+        onChange={changeMode}
       />
-      <Cards data={pokemonList} game={randomPokemons} mode={mode} />
+      <Cards
+        data={pokemonList}
+        // num = { numberList }
+        game={randomPokemons}
+        mode={mode}
+      />
       {/* <Cards data = { pokemonList } />
       <Cards data = { pokemonList } />
       <Cards data = { pokemonList } />
