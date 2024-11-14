@@ -129,8 +129,6 @@ function App() {
 
   const handleModeChange = (selectedMode) => {
     setMode(selectedMode)
-    console.log(mode)
-    console.log(typeof mode)
   }
 
   //maybe merge into useModal hook
