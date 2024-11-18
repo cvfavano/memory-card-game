@@ -78,6 +78,7 @@ function useGameOver() {
   //this could be shared also(?)
   function toggleModal() {
     document.querySelector('#game-over-modal').style.display = 'block'
+
     // setIsGameOver(true)
   }
   return { isGameOver, toggleModal }
@@ -109,8 +110,16 @@ function useGameOver() {
 // },[])
 // //
 
+function closeModal() {
+  document.querySelector('#welcome-modal').style.display = 'none'
+}
 function App() {
   const [mode, setMode] = useState(1)
+
+  const handleModeChange = (selectedMode) => {
+    setMode(selectedMode)
+  }
+
   //maybe merge into useModal hook
   const { toggleWelcomeModal } = useWelcome()
   // const { numberList } = usePokemonGameList()
@@ -124,8 +133,8 @@ function App() {
     <div>
       <WelcomeModal
         clickHandler={toggleWelcomeModal}
-        mode={mode}
-        onChange={changeMode}
+        onChange={handleModeChange} // was told this could be onchange={setMode}
+        startGame={closeModal}
       />
       <Cards
         data={pokemonList}
