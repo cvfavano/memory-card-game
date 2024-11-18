@@ -10,7 +10,7 @@ WelcomeModal.propTypes = {
   // mode: PropTypes.number.isRequired,
   onChange: PropTypes.func,
 }
-
+//hide .cards-container here
 //why is this not valid {clickHandler}
 function WelcomeModal({ clickHandler, onChange }) {
   return (

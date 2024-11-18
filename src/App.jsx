@@ -91,6 +91,7 @@ function useGameOver() {
   //this could be shared also(?)
   function toggleModal() {
     document.querySelector('#game-over-modal').style.display = 'block'
+
     // setIsGameOver(true)
   }
   return { isGameOver, toggleModal }
@@ -124,6 +125,9 @@ function useGameOver() {
 // },[])
 // //
 
+function closeModal() {
+  document.querySelector('#welcome-modal').style.display = 'none'
+}
 function App() {
   const [mode, setMode] = useState(1)
 
@@ -142,6 +146,7 @@ function App() {
       <WelcomeModal
         clickHandler={toggleWelcomeModal}
         onChange={handleModeChange} // was told this could be onchange={setMode}
+        startGame={closeModal}
       />
       <Cards data={pokemonList} game={randomPokemons} mode={mode} />
       {/* <Cards data = { pokemonList } />
