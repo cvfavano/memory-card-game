@@ -67,7 +67,7 @@ function useWelcome() {
   function toggleWelcomeModal() {
     document.querySelector('#welcome-modal').style.display = 'none'
     document.querySelector('.cards-container').style.display = 'flex'
-    setWelcomeModal(false)
+    //  setWelcomeModal(false)
   }
   return { isWelcomeModal, toggleWelcomeModal }
 }
@@ -113,6 +113,7 @@ function useGameOver() {
 
 function closeModal() {
   document.querySelector('#welcome-modal').style.display = 'none'
+  document.querySelector('.cards-container').style.display = 'flex'
 }
 function App() {
   const [mode, setMode] = useState(1)
