@@ -11,9 +11,7 @@ Cards.propTypes = {
 function Cards({ data, mode }) {
   // ***** TODO *****
   //build array clicked
-  // build array cards
 
-  //(?) how to properly check if data came back
   if (data !== null && data?.length > 1) {
     console.log(data)
 
@@ -58,7 +56,6 @@ function Cards({ data, mode }) {
         <>
           {totalCards.map((pokemon) => (
             <div className="card" key={pokemon.id}>
-              {/* split url to get number */}
               <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
                 alt={`Pokemon ${pokemon.name}`}
