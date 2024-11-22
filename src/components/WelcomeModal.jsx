@@ -19,7 +19,7 @@ function WelcomeModal({ clickHandler, onChange }) {
           <span className="close-modal" onClick={closeModal}>
             &times;
           </span>
-          <p>Welcome!</p>
+          <h1>Welcome!</h1>
           <h2>Game Play</h2>
           <p>
             Click on each Pok&eacute;Mon card once - no more, no less! <br />
