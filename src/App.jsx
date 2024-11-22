@@ -57,7 +57,8 @@ function usePokemonData() {
     }
   }, [pokemonList, isRandom])
 
-  return { pokemonList, randomPokemons: pokemonList }
+  return { pokemonList }
+  // , randomPokemons: pokemonList }
 }
 
 function useWelcome() {
@@ -66,6 +67,7 @@ function useWelcome() {
 
   function toggleWelcomeModal() {
     document.querySelector('#welcome-modal').style.display = 'none'
+    document.querySelector('.cards-container').style.display = 'flex'
     setWelcomeModal(false)
   }
   return { isWelcomeModal, toggleWelcomeModal }
@@ -123,12 +125,12 @@ function App() {
   //maybe merge into useModal hook
   const { toggleWelcomeModal } = useWelcome()
   // const { numberList } = usePokemonGameList()
-  const { pokemonList, randomPokemons } = usePokemonData()
+  const { pokemonList } = usePokemonData()
   const { toggleModal } = useGameOver()
 
-  function changeMode(number) {
-    setMode(number)
-  }
+  // function changeMode(number) {
+  //   setMode(number)
+  // }
   return (
     <div>
       <WelcomeModal
@@ -139,7 +141,7 @@ function App() {
       <Cards
         data={pokemonList}
         // num = { numberList }
-        game={randomPokemons}
+        //    game={randomPokemons}
         mode={mode}
       />
       {/* <Cards data = { pokemonList } />

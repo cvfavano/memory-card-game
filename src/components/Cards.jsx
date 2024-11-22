@@ -7,7 +7,7 @@ Cards.propTypes = {
   mode: PropTypes.number.isRequired,
 }
 
-function Cards({ data, game, mode }) {
+function Cards({ data, mode }) {
   //console.log(props.data[0]) //bulbasaur
   //todo push to array for total number of cards, based on difficulty
   //loop through array to create card
