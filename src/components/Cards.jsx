@@ -15,7 +15,7 @@ function Cards({ data, mode }) {
 
   //(?) how to properly check if data came back
   if (data !== null && data?.length > 1) {
-    //    console.log(pokemonNumber)
+    console.log(data)
 
     function getRandomInt(min, max) {
       min = Math.ceil(min)
@@ -39,7 +39,12 @@ function Cards({ data, mode }) {
         let num = getRandomInt(0, data.length)
 
         if (!cardsArray.includes(num)) {
-          cardsArray.push(num)
+          let pokemonId = data[num].url.split('/')[6]
+          let pokemon = {
+            id: pokemonId,
+            name: data[num].name,
+          }
+          cardsArray.push(pokemon)
         }
       }
       return cardsArray
@@ -51,14 +56,15 @@ function Cards({ data, mode }) {
       console.log(totalCards)
       return (
         <>
-          {totalCards.map((pokemonNumber) => (
-            <div className="card" key={data[pokemonNumber]?.name}>
+          {totalCards.map((pokemon) => (
+            <div className="card" key={pokemon.id}>
+              {/* split url to get number */}
               <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonNumber}.png`}
-                alt={`Pokemon ${data[pokemonNumber]?.name}`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
+                alt={`Pokemon ${pokemon.name}`}
               />
 
-              <p>{`${data[pokemonNumber]?.name}`}</p>
+              <p>{`${pokemon.name}`}</p>
             </div>
           ))}
         </>
