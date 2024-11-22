@@ -24,38 +24,47 @@ function Cards({ data, mode }) {
       return Math.floor(Math.random() * (max - min + 1)) + min
     }
 
-    const getCardTotal = (mode) => {
-      let totalCards
+    const getCardTotal = (modeDifficulty) => {
+      let totalCardNumber
 
-      mode === 3
-        ? (totalCards = 12)
-        : mode === 2
-          ? (totalCards = 9)
-          : (totalCards = 6)
+      modeDifficulty === 3
+        ? (totalCardNumber = 12)
+        : modeDifficulty === 2
+          ? (totalCardNumber = 9)
+          : (totalCardNumber = 6)
 
-      return totalCards
+      let cardsArray = []
+
+      for (let i = 0; i < totalCardNumber; i++) {
+        let num = getRandomInt(0, data.length)
+
+        if (!cardsArray.includes(num)) {
+          cardsArray.push(num)
+        }
+      }
+      return cardsArray
     }
 
     const createCard = () => {
       let totalCards = getCardTotal(mode)
-      const num = getRandomInt(0, data.length)
-      const url = data[num].url
-      const pokemonIChooseYou = url.split('/')[6]
-      //      console.log({ url, pokemonIChooseYou, num, data: props.data })
+
       console.log(totalCards)
       return (
-        <div className="card">
-          <img
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIChooseYou}.png`}
-            alt={`Pokemon ${data[num]?.name}`}
-          />
+        <>
+          {totalCards.map((pokemonNumber) => (
+            <div className="card" key={data[pokemonNumber]?.name}>
+              <img
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonNumber}.png`}
+                alt={`Pokemon ${data[pokemonNumber]?.name}`}
+              />
 
-          <p>{`${data[num]?.name}`}</p>
-        </div>
+              <p>{`${data[pokemonNumber]?.name}`}</p>
+            </div>
+          ))}
+        </>
       )
     }
 
-    //create array with mode length, then map over it in return
     return (
       <>
         <div className="cards-container">{createCard()}</div>
