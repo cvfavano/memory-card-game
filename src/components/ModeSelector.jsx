@@ -7,9 +7,9 @@ ModeSelector.propTypes = {
 
 function ModeSelector({ mode, onChange }) {
   const options = [
-    { value: 1, label: 'Easy' },
-    { value: 2, label: 'Medium' },
-    { value: 3, label: 'Difficult' },
+    { value: 1, label: 'Easy Mode' },
+    { value: 2, label: 'Medium Mode' },
+    { value: 3, label: 'Difficult Mode' },
   ]
 
   const handleChange = (event) => {
