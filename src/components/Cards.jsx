@@ -1,4 +1,6 @@
 // //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1000.png
+//console.log(props.data[0]) //bulbasaur
+
 import PropTypes from 'prop-types'
 
 Cards.propTypes = {
@@ -7,9 +9,9 @@ Cards.propTypes = {
 }
 
 function Cards({ data, mode }) {
-  //console.log(props.data[0]) //bulbasaur
-  //todo push to array for total number of cards, based on difficulty
-  //loop through array to create card
+  // ***** TODO *****
+  //build array clicked
+  // build array cards
 
   //(?) how to properly check if data came back
   if (data !== null && data?.length > 1) {

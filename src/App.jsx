@@ -13,7 +13,7 @@ useWelcome.PropTypes = {
 
 function usePokemonData() {
   const [pokemonList, setPokemonList] = useState([])
-  const [isRandom, setIsRandom] = useState(false)
+  // const [isRandom, setIsRandom] = useState(false)
   // const [randomPokemons, setRandomPokemons] = useState(new Set());
   function getData() {
     const data = localStorage.getItem('pokemon')
@@ -36,33 +36,32 @@ function usePokemonData() {
     }
   }, [])
 
-  useEffect(() => {
-    const getRandomPokemon = (count) => {
-      // getting random 20
-      const selectedPokemon = new Set()
-      while (selectedPokemon.size < count) {
-        const number = Math.floor(Math.random() * pokemonList.length)
-        const pokemon = pokemonList[number]
-        if (pokemon) {
-          selectedPokemon.add(pokemon)
-        }
-      }
-      // setRandomPokemons(selectedPokemon)
-      return Array.from(selectedPokemon)
-    }
-    if (pokemonList?.length > 0 && !isRandom) {
-      const listy = getRandomPokemon(20)
-      setIsRandom(true)
-      setPokemonList(listy)
-    }
-  }, [pokemonList, isRandom])
+  // useEffect(() => {
+  //   const getRandomPokemon = (count) => {
+  //     // getting random 20
+  //     const selectedPokemon = new Set()
+  //     while (selectedPokemon.size < count) {
+  //       const number = Math.floor(Math.random() * pokemonList.length)
+  //       const pokemon = pokemonList[number]
+  //       if (pokemon) {
+  //         selectedPokemon.add(pokemon)
+  //       }
+  //     }
+  //     return Array.from(selectedPokemon)
+  //   }
+  //   if (pokemonList?.length > 0 && !isRandom) {
+  //     const listy = getRandomPokemon(20)
+  //     setIsRandom(true)
+  //     setPokemonList(listy)
+  //   }
+  // }, [pokemonList, isRandom])
 
   return { pokemonList }
   // , randomPokemons: pokemonList }
 }
 
 function useWelcome() {
-  //should this even be state
+  //should this even be state NOO, fix this to toggle function only
   const [isWelcomeModal, setWelcomeModal] = useState(true)
 
   function toggleWelcomeModal() {
@@ -77,7 +76,7 @@ function useGameOver() {
   // eslint-disable-next-line no-unused-vars
   const [isGameOver, setIsGameOver] = useState(false)
 
-  //this could be shared also(?)
+  //this could be shared also(?) No. fix this to toggle function only
   function toggleModal() {
     document.querySelector('#game-over-modal').style.display = 'block'
 
@@ -128,26 +127,15 @@ function App() {
   const { pokemonList } = usePokemonData()
   const { toggleModal } = useGameOver()
 
-  // function changeMode(number) {
-  //   setMode(number)
-  // }
   return (
     <div>
       <WelcomeModal
         clickHandler={toggleWelcomeModal}
-        onChange={handleModeChange} // was told this could be onchange={setMode}
+        onChange={handleModeChange}
         startGame={closeModal}
       />
-      <Cards
-        data={pokemonList}
-        // num = { numberList }
-        //    game={randomPokemons}
-        mode={mode}
-      />
-      {/* <Cards data = { pokemonList } />
-      <Cards data = { pokemonList } />
-      <Cards data = { pokemonList } />
-      <Cards data = { pokemonList } /> */}
+      <Cards data={pokemonList} mode={mode} />
+
       <GameOverModal clickHandler={toggleModal} />
     </div>
   )
