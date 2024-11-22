@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 Cards.propTypes = {
   data: PropTypes.array.isRequired,
-  game: PropTypes.array.isRequired,
   mode: PropTypes.number.isRequired,
 }
 
