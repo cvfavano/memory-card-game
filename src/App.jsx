@@ -37,28 +37,7 @@ function usePokemonData() {
     }
   }, [])
 
-  // useEffect(() => {
-  //   const getRandomPokemon = (count) => {
-  //     // getting random 20
-  //     const selectedPokemon = new Set()
-  //     while (selectedPokemon.size < count) {
-  //       const number = Math.floor(Math.random() * pokemonList.length)
-  //       const pokemon = pokemonList[number]
-  //       if (pokemon) {
-  //         selectedPokemon.add(pokemon)
-  //       }
-  //     }
-  //     return Array.from(selectedPokemon)
-  //   }
-  //   if (pokemonList?.length > 0 && !isRandom) {
-  //     const listy = getRandomPokemon(20)
-  //     setIsRandom(true)
-  //     setPokemonList(listy)
-  //   }
-  // }, [pokemonList, isRandom])
-
   return { pokemonList }
-  // , randomPokemons: pokemonList }
 }
 
 function useWelcome() {
@@ -85,32 +64,6 @@ function useGameOver() {
   }
   return { isGameOver, toggleModal }
 }
-//rename this
-// const getRandomPokemon = (count) => {
-//   const selectedPokemon = new Set();
-//   const [gamePokemon, setGamePokemon] = useState([{}])
-//   const { pokemonList } = usePokemonData()
-
-//   while(selectedPokemon.size < count){
-//     const number = Math.floor(Math.random() * pokemonList.length)
-//     const pokemon = pokemonList[number]
-//     if(pokemon){
-//       selectedPokemon.add(pokemon)
-//     }
-//   }
-//   setRandomPokemons(selectedPokemon)
-// }
-// useEffect(() => {
-//   const numbers = new Set()
-
-//   while(numbers.size < 30){
-//     let number = getRandomInt(0,299)
-//     numbers.add(number)
-//   }
-//   setNumbers(Array.from(numbers))
-
-// },[])
-// //
 
 function closeModal() {
   document.querySelector('#welcome-modal').style.display = 'none'
@@ -124,7 +77,6 @@ function App() {
 
   //maybe merge into useModal hook
   const { toggleWelcomeModal } = useWelcome()
-  // const { numberList } = usePokemonGameList()
   const { pokemonList } = usePokemonData()
   const { toggleModal } = useGameOver()
 
