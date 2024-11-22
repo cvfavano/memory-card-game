@@ -13,6 +13,7 @@ useWelcome.PropTypes = {
 
 function usePokemonData() {
   const [pokemonList, setPokemonList] = useState([])
+  const [clickedPokemon, setclickedPokemon] = useState([])
   // const [isRandom, setIsRandom] = useState(false)
   // const [randomPokemons, setRandomPokemons] = useState(new Set());
   function getData() {
