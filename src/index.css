@@ -148,6 +148,10 @@ button:focus-visible {
   border-radius: 5px;
   text-align: center;
 }
+
+#welcome-modal select:focus-visible {
+  outline: none;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
