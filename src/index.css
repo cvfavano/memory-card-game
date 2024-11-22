@@ -127,6 +127,11 @@ button:focus-visible {
 .cards-container {
   display: none;
 }
+
+#game-mode {
+  margin-bottom: 10px;
+  padding: 3px 1px;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
