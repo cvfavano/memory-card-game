@@ -11,6 +11,7 @@ WelcomeModal.propTypes = {
   onChange: PropTypes.func,
 }
 //hide .cards-container here
+//why is this not valid {clickHandler}
 function WelcomeModal({ clickHandler, onChange }) {
   return (
     <div>
@@ -19,12 +20,9 @@ function WelcomeModal({ clickHandler, onChange }) {
           <span className="close-modal" onClick={closeModal}>
             &times;
           </span>
-          <h1>Welcome!</h1>
+          <p>Welcome!</p>
           <h2>Game Play</h2>
-          <p>
-            Click on each Pok&eacute;Mon card once - no more, no less! <br />
-            The game ends if you click on any card twice.
-          </p>
+          <p>Instructions here</p>
           <ModeSelector onChange={onChange} />
           <button id="start-game" type="button" onClick={clickHandler}>
             Let&apos;s Go

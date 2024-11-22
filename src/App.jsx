@@ -113,6 +113,9 @@ function useGameOver() {
 
 function closeModal() {
   document.querySelector('#welcome-modal').style.display = 'none'
+
+  //THis not working
+  document.querySelector('.cards-container').style.display = 'flex'
 }
 function App() {
   const [mode, setMode] = useState(1)
