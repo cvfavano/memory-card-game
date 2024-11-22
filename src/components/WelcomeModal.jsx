@@ -21,7 +21,10 @@ function WelcomeModal({ clickHandler, onChange }) {
           </span>
           <p>Welcome!</p>
           <h2>Game Play</h2>
-          <p>Instructions here</p>
+          <p>
+            Click on each Pok&eacute;Mon card once - no more, no less! <br />
+            The game ends if you click on any card twice.
+          </p>
           <ModeSelector onChange={onChange} />
           <button id="start-game" type="button" onClick={clickHandler}>
             Let&apos;s Go
