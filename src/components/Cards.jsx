@@ -11,14 +11,14 @@ Cards.propTypes = {
 }
 
 function Cards({ data, mode, gameStatus }) {
-  console.log(gameStatus)
+  // console.log(gameStatus)
   //gameStatus calls endGame
   // ***** TODO *****
   //fix dupes
   //fix css of button or figure out how to click div with nested elements and get div id
 
   const [clickedPokemon, setClickedPokemon] = useState([])
-
+  //console.log(clickedPokemon)
   if (data !== null && data?.length > 1) {
     // console.log(data)
 
@@ -42,8 +42,10 @@ function Cards({ data, mode, gameStatus }) {
 
       for (let i = 0; i < totalCardNumber; i++) {
         let num = getRandomInt(0, data.length)
-
-        if (!cardsArray.includes(num)) {
+        if (
+          !cardsArray.find((pokemon) => pokemon.id == num) ||
+          cardsArray.length === 0
+        ) {
           let pokemonId = data[num].url.split('/')[6]
           let pokemon = {
             id: pokemonId,
@@ -78,7 +80,6 @@ function Cards({ data, mode, gameStatus }) {
     }
     const cardClickHandler = (event) => {
       setClickedPokemon((prevPokemon) => [...prevPokemon, event.target.value])
-      console.log(clickedPokemon)
       createCard()
     }
     return (
