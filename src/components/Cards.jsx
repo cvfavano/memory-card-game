@@ -1,18 +1,24 @@
 // //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1000.png
 //console.log(props.data[0]) //bulbasaur
-
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 
 Cards.propTypes = {
   data: PropTypes.array.isRequired,
   mode: PropTypes.number.isRequired,
-  clickHandler: PropTypes.func,
-  trackedPokemon: PropTypes.array.isRequired,
+  gameStatus: PropTypes.func,
+  // trackedPokemon: PropTypes.array.isRequired,
 }
 
-function Cards({ data, mode, clickHandler, trackedPokemon }) {
+function Cards({ data, mode, gameStatus }) {
+  console.log(gameStatus)
+  //gameStatus calls endGame
   // ***** TODO *****
-  //build array clicked
+  //fix dupes
+  //fix css of button or figure out how to click div with nested elements and get div id
+
+  const [clickedPokemon, setClickedPokemon] = useState([])
+
   if (data !== null && data?.length > 1) {
     // console.log(data)
 
@@ -59,7 +65,7 @@ function Cards({ data, mode, clickHandler, trackedPokemon }) {
               className="card"
               key={pokemon.id}
               value={pokemon.id}
-              onClick={clickHandler}
+              onClick={cardClickHandler}
               style={{
                 backgroundImage: `url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png')`,
               }}
@@ -70,7 +76,11 @@ function Cards({ data, mode, clickHandler, trackedPokemon }) {
         </>
       )
     }
-
+    const cardClickHandler = (event) => {
+      setClickedPokemon((prevPokemon) => [...prevPokemon, event.target.value])
+      console.log(clickedPokemon)
+      createCard()
+    }
     return (
       <>
         <div className="cards-container">{createCard()}</div>

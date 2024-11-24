@@ -50,32 +50,21 @@ function useWelcome() {
 }
 
 function useGameOver() {
-  // eslint-disable-next-line no-unused-vars
   const [isGameOver, setIsGameOver] = useState(false)
 
   //this could be shared also(?) No. fix this to toggle function only
   function toggleModal() {
     document.querySelector('#game-over-modal').style.display = 'block'
-
-    // setIsGameOver(true)
   }
-  return { isGameOver, toggleModal }
+  const endGame = () => {
+    setIsGameOver(true)
+    toggleModal()
+  }
+  return { endGame }
 }
 
 function closeModal() {
   document.querySelector('#welcome-modal').style.display = 'none'
-}
-function useTrackedPokemon() {
-  const [clickedPokemon, setClickedPokemon] = useState([])
-
-  const cardClickHandler = (event) => {
-    console.log(event.target)
-    console.log('ID: ' + event.target.value)
-    setClickedPokemon((prevPokemon) => [...prevPokemon, event.target.value])
-    console.log(clickedPokemon)
-  }
-
-  return { clickedPokemon, cardClickHandler }
 }
 
 function App() {
@@ -88,9 +77,7 @@ function App() {
   //maybe merge into useModal hook
   const { toggleWelcomeModal } = useWelcome()
   const { pokemonList } = usePokemonData()
-  const { toggleModal } = useGameOver()
-
-  const { clickedPokemon, cardClickHandler } = useTrackedPokemon()
+  const { endGame, toggleModal } = useGameOver()
 
   return (
     <div>
@@ -99,12 +86,7 @@ function App() {
         onChange={handleModeChange}
         startGame={closeModal}
       />
-      <Cards
-        data={pokemonList}
-        mode={mode}
-        trackedPokemon={clickedPokemon}
-        clickHandler={cardClickHandler}
-      />
+      <Cards data={pokemonList} mode={mode} gameStatus={endGame} />
 
       <GameOverModal clickHandler={toggleModal} />
     </div>
