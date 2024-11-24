@@ -71,6 +71,8 @@ function useTrackedPokemon() {
   const cardClickHandler = (event) => {
     console.log(event.target)
     console.log('ID: ' + event.target.value)
+    setClickedPokemon((prevPokemon) => [...prevPokemon, event.target.value])
+    console.log(clickedPokemon)
   }
 
   return { clickedPokemon, cardClickHandler }
