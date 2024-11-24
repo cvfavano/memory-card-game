@@ -6,14 +6,15 @@ import PropTypes from 'prop-types'
 Cards.propTypes = {
   data: PropTypes.array.isRequired,
   mode: PropTypes.number.isRequired,
+  clickHandler: PropTypes.func,
+  trackedPokemon: PropTypes.array.isRequired,
 }
 
-function Cards({ data, mode }) {
+function Cards({ data, mode, clickHandler, trackedPokemon }) {
   // ***** TODO *****
   //build array clicked
-
   if (data !== null && data?.length > 1) {
-    console.log(data)
+    // console.log(data)
 
     function getRandomInt(min, max) {
       min = Math.ceil(min)
@@ -51,18 +52,20 @@ function Cards({ data, mode }) {
     const createCard = () => {
       let totalCards = getCardTotal(mode)
 
-      console.log(totalCards)
       return (
         <>
           {totalCards.map((pokemon) => (
-            <div className="card" key={pokemon.id}>
-              <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
-                alt={`Pokemon ${pokemon.name}`}
-              />
-
-              <p>{`${pokemon.name}`}</p>
-            </div>
+            <button
+              className="card"
+              key={pokemon.id}
+              value={pokemon.id}
+              onClick={clickHandler}
+              style={{
+                backgroundImage: `url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png')`,
+              }}
+            >
+              {pokemon.name}
+            </button>
           ))}
         </>
       )

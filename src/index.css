@@ -106,29 +106,25 @@ button:focus-visible {
   max-width: 1200px;
   justify-content: center;
   gap: 30px 30px;
-}
-
-.card {
-  max-width: 24%;
-  background: black;
-  outline: 8px solid rgba(255, 255, 255, 0.87);
-  border-radius: 3px;
-  padding-top: 29px;
-}
-.card img {
-  display: block;
-  max-width: 70%;
-  margin: 0 auto;
-}
-
-.card p {
-  text-align: center;
-}
-
-.cards-container {
   display: none;
 }
 
+.card {
+  display: block;
+  max-width: 24%;
+  padding: 26% 7% 2%;
+  background-color: black;
+  outline: 8px solid rgba(255, 255, 255, 0.87);
+  border-radius: 3px;
+  background-size: 90%;
+  background-position: center 17%;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+.card:focus,
+.card:focus-visible {
+  outline: 8px solid rgba(255, 255, 255, 0.87);
+}
 #game-mode {
   margin-bottom: 15px;
   padding: 3px 1px;

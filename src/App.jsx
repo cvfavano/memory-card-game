@@ -13,9 +13,7 @@ useWelcome.PropTypes = {
 
 function usePokemonData() {
   const [pokemonList, setPokemonList] = useState([])
-  const [clickedPokemon, setclickedPokemon] = useState([])
-  // const [isRandom, setIsRandom] = useState(false)
-  // const [randomPokemons, setRandomPokemons] = useState(new Set());
+
   function getData() {
     const data = localStorage.getItem('pokemon')
     return data ? JSON.parse(data) : null
@@ -29,7 +27,6 @@ function usePokemonData() {
       fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=300')
         .then((response) => response.json())
         .then((response) => {
-          //loop through array and stringify the key
           localStorage.setItem('pokemon', JSON.stringify(response.results))
           setPokemonList(localStorage.getItem('pokemon'))
         })
@@ -68,6 +65,17 @@ function useGameOver() {
 function closeModal() {
   document.querySelector('#welcome-modal').style.display = 'none'
 }
+function useTrackedPokemon() {
+  const [clickedPokemon, setClickedPokemon] = useState([])
+
+  const cardClickHandler = (event) => {
+    console.log(event.target)
+    console.log('ID: ' + event.target.value)
+  }
+
+  return { clickedPokemon, cardClickHandler }
+}
+
 function App() {
   const [mode, setMode] = useState(1)
 
@@ -80,6 +88,8 @@ function App() {
   const { pokemonList } = usePokemonData()
   const { toggleModal } = useGameOver()
 
+  const { clickedPokemon, cardClickHandler } = useTrackedPokemon()
+
   return (
     <div>
       <WelcomeModal
@@ -87,7 +97,12 @@ function App() {
         onChange={handleModeChange}
         startGame={closeModal}
       />
-      <Cards data={pokemonList} mode={mode} />
+      <Cards
+        data={pokemonList}
+        mode={mode}
+        trackedPokemon={clickedPokemon}
+        clickHandler={cardClickHandler}
+      />
 
       <GameOverModal clickHandler={toggleModal} />
     </div>
