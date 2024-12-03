@@ -18,6 +18,13 @@ function Cards({ data, mode, gameStatus }) {
   //fix css of button or figure out how to click div with nested elements and get div id
 
   const [clickedPokemon, setClickedPokemon] = useState([])
+  const [cards, setCards] = useState([])
+
+  const appendCard = () => {
+    setCards((prevCards, newCard) => {
+      return { ...prevCards, newCard }
+    })
+  }
   //console.log(clickedPokemon)
   if (data !== null && data?.length > 1) {
     // console.log(data)
