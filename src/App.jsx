@@ -86,8 +86,10 @@ function App() {
         onChange={handleModeChange}
         startGame={closeModal}
       />
-      <Cards data={pokemonList} mode={mode} gameStatus={endGame} />
 
+      {pokemonList && (
+        <Cards data={pokemonList} mode={mode} gameStatus={endGame} />
+      )}
       <GameOverModal clickHandler={toggleModal} />
     </div>
   )
