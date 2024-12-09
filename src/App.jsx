@@ -23,7 +23,9 @@ function usePokemonData() {
     const parsedData = getData()
     if (parsedData) {
       setPokemonList(parsedData)
+      console.log('here')
     } else {
+      console.log('yo')
       fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=300')
         .then((response) => response.json())
         .then((response) => {
@@ -78,7 +80,7 @@ function App() {
   const { toggleWelcomeModal } = useWelcome()
   const { pokemonList } = usePokemonData()
   const { endGame, toggleModal } = useGameOver()
-
+  console.log(pokemonList)
   return (
     <div>
       <WelcomeModal
@@ -87,7 +89,7 @@ function App() {
         startGame={closeModal}
       />
 
-      {pokemonList && (
+      {pokemonList.length > 0 && (
         <Cards data={pokemonList} mode={mode} gameStatus={endGame} />
       )}
       <GameOverModal clickHandler={toggleModal} />
