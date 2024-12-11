@@ -16,24 +16,22 @@ function Cards({ data, mode, gameStatus }) {
   // ***** TODO *****
   //fix dupes
   //fix css of button or figure out how to click div with nested elements and get div id
-
+  let cards = new Set()
   const [clickedPokemon, setClickedPokemon] = useState([])
-  const [cards, setCards] = useState([])
-
-  const appendCard = () => {
-    setCards((prevCards, newCard) => {
-      return { ...prevCards, newCard }
-    })
-  }
-  //console.log(clickedPokemon)
-
-  // console.log(data)
 
   function getRandomInt(min, max) {
     min = Math.ceil(min)
     max = Math.floor(max)
 
     return Math.floor(Math.random() * (max - min + 1)) + min
+  }
+
+  const makeCard = (number) => {
+    console.log(data[number].url.split('/')[6])
+    cards.add({
+      id: data[number].url.split('/')[6],
+      name: data[number].name,
+    })
   }
 
   const getCardTotal = (modeDifficulty) => {
@@ -45,31 +43,21 @@ function Cards({ data, mode, gameStatus }) {
         ? (totalCardNumber = 9)
         : (totalCardNumber = 6)
 
-    let cardsArray = []
-
-    for (let i = 0; i < totalCardNumber; i++) {
+    while (cards.size < totalCardNumber) {
       let num = getRandomInt(0, data.length)
-      if (
-        !cardsArray.find((pokemon) => pokemon.id == num) ||
-        cardsArray.length === 0
-      ) {
-        let pokemonId = data[num].url.split('/')[6]
-        let pokemon = {
-          id: pokemonId,
-          name: data[num].name,
-        }
-        cardsArray.push(pokemon)
-      }
-    }
-    return cardsArray
-  }
 
-  const createCard = () => {
+      console.log('here')
+      makeCard(num)
+    }
+    return cards
+  }
+  console.log(cards)
+  const displayCards = () => {
     let totalCards = getCardTotal(mode)
 
     return (
       <>
-        {totalCards.map((pokemon) => (
+        {Array.from(totalCards).map((pokemon) => (
           <button
             className="card"
             key={pokemon.id}
@@ -87,11 +75,11 @@ function Cards({ data, mode, gameStatus }) {
   }
   const cardClickHandler = (event) => {
     setClickedPokemon((prevPokemon) => [...prevPokemon, event.target.value])
-    createCard()
+    displayCards()
   }
   return (
     <>
-      <div className="cards-container">{createCard()}</div>
+      <div className="cards-container">{displayCards()}</div>
     </>
   )
 }
