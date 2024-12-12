@@ -26,13 +26,13 @@ function Cards({ data, mode, gameStatus }) {
     return Math.floor(Math.random() * (max - min + 1)) + min
   }
 
-  const makeCard = (number) => {
-    console.log(data[number].url.split('/')[6])
-    cards.add({
-      id: data[number].url.split('/')[6],
-      name: data[number].name,
-    })
-  }
+  // const makeCard = (number) => {
+  //   console.log(data[number].url.split('/')[6])
+  //   cards.add({
+  //     id: data[number].url.split('/')[6],
+  //     name: data[number].name,
+  //   })
+  // }
 
   const getCardTotal = (modeDifficulty) => {
     let totalCardNumber
@@ -47,8 +47,9 @@ function Cards({ data, mode, gameStatus }) {
       let num = getRandomInt(0, data.length)
 
       console.log('here')
-      makeCard(num)
+      cards.add(data[num].url.split('/')[6])
     }
+
     return cards
   }
   console.log(cards)
@@ -60,14 +61,14 @@ function Cards({ data, mode, gameStatus }) {
         {Array.from(totalCards).map((pokemon) => (
           <button
             className="card"
-            key={pokemon.id}
-            value={pokemon.id}
+            key={pokemon}
+            value={pokemon}
             onClick={cardClickHandler}
             style={{
               backgroundImage: `url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png')`,
             }}
           >
-            {pokemon.name}
+            {data[pokemon].name}
           </button>
         ))}
       </>
