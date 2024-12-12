@@ -26,14 +26,6 @@ function Cards({ data, mode, gameStatus }) {
     return Math.floor(Math.random() * (max - min + 1)) + min
   }
 
-  // const makeCard = (number) => {
-  //   console.log(data[number].url.split('/')[6])
-  //   cards.add({
-  //     id: data[number].url.split('/')[6],
-  //     name: data[number].name,
-  //   })
-  // }
-
   const getCardTotal = (modeDifficulty) => {
     let totalCardNumber
 
@@ -45,12 +37,15 @@ function Cards({ data, mode, gameStatus }) {
 
     while (cards.size < totalCardNumber) {
       let num = getRandomInt(0, data.length)
-
-      console.log('here')
-      cards.add(data[num].url.split('/')[6])
+      cards.add(parseInt(data[num].url.split('/')[6]))
     }
 
     return cards
+  }
+
+  function gameOver() {
+    const cardsContainer = document.querySelector('.cards-container')
+    cardsContainer.style.display = 'none'
   }
   console.log(cards)
   const displayCards = () => {
@@ -76,7 +71,15 @@ function Cards({ data, mode, gameStatus }) {
   }
   const cardClickHandler = (event) => {
     setClickedPokemon((prevPokemon) => [...prevPokemon, event.target.value])
-    displayCards()
+    console.log(clickedPokemon)
+
+    if (!clickedPokemon.includes(event.target.value)) {
+      displayCards()
+    } else {
+      console.log(event.target.value)
+      gameOver()
+      console.log('GAME OVER')
+    }
   }
   return (
     <>
