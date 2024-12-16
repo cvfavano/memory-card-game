@@ -14,7 +14,7 @@ function Cards({ data, mode, gameStatus }) {
   // console.log(gameStatus)
   //gameStatus calls endGame
   // ***** TODO *****
-  //fix dupes
+
   //fix css of button or figure out how to click div with nested elements and get div id
   let cards = new Set()
   const [clickedPokemon, setClickedPokemon] = useState([])
@@ -37,17 +37,18 @@ function Cards({ data, mode, gameStatus }) {
 
     while (cards.size < totalCardNumber) {
       let num = getRandomInt(0, data.length)
+
       cards.add(parseInt(data[num].url.split('/')[6]))
     }
-
     return cards
   }
 
   function gameOver() {
     const cardsContainer = document.querySelector('.cards-container')
     cardsContainer.style.display = 'none'
+    console.log(gameStatus)
   }
-  console.log(cards)
+
   const displayCards = () => {
     let totalCards = getCardTotal(mode)
 
@@ -60,7 +61,7 @@ function Cards({ data, mode, gameStatus }) {
             value={pokemon}
             onClick={cardClickHandler}
             style={{
-              backgroundImage: `url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png')`,
+              backgroundImage: `url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon}.png')`,
             }}
           >
             {data[pokemon].name}
@@ -71,7 +72,6 @@ function Cards({ data, mode, gameStatus }) {
   }
   const cardClickHandler = (event) => {
     setClickedPokemon((prevPokemon) => [...prevPokemon, event.target.value])
-    console.log(clickedPokemon)
 
     if (!clickedPokemon.includes(event.target.value)) {
       displayCards()
@@ -79,6 +79,7 @@ function Cards({ data, mode, gameStatus }) {
       console.log(event.target.value)
       gameOver()
       console.log('GAME OVER')
+      gameStatus
     }
   }
   return (

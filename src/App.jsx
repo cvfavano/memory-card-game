@@ -53,18 +53,20 @@ function useGameOver() {
   const [isGameOver, setIsGameOver] = useState(false)
 
   //this could be shared also(?) No. fix this to toggle function only
-  function toggleModal() {
+  function toggleEndModal() {
     document.querySelector('#game-over-modal').style.display = 'block'
   }
   const endGame = () => {
     setIsGameOver(true)
-    toggleModal()
+
+    //toggleModal()
   }
-  return { endGame }
+  return { toggleEndModal, endGame }
 }
 
 function closeModal() {
   document.querySelector('#welcome-modal').style.display = 'none'
+  document.querySelector('.cards-container').style.display = 'flex'
 }
 
 function App() {
@@ -77,21 +79,20 @@ function App() {
   //maybe merge into useModal hook
   const { toggleWelcomeModal } = useWelcome()
   const { pokemonList } = usePokemonData()
-  const { endGame, toggleModal } = useGameOver()
+  const { endGame, toggleEndModal } = useGameOver()
   return (
     <div>
       <WelcomeModal
         clickHandler={toggleWelcomeModal}
         onChange={handleModeChange}
-        startGame={closeModal}
       />
-
       {pokemonList.length && (
         <Cards data={pokemonList} mode={mode} gameStatus={endGame} />
       )}
-      <GameOverModal clickHandler={toggleModal} />
+      <GameOverModal clickHandler={toggleEndModal} />
     </div>
   )
 }
 
 export default App
+7

@@ -1,9 +1,6 @@
 import PropTypes from 'prop-types'
 import ModeSelector from './ModeSelector.jsx'
 //should this be a shared function
-function closeModal() {
-  document.querySelector('#welcome-modal').style.display = 'none'
-}
 
 WelcomeModal.propTypes = {
   clickHandler: PropTypes.func.isRequired,
@@ -16,7 +13,7 @@ function WelcomeModal({ clickHandler, onChange }) {
     <div>
       <div id="welcome-modal" className="modal">
         <div className="modal-content">
-          <span className="close-modal" onClick={closeModal}>
+          <span className="close-modal" onClick={clickHandler}>
             &times;
           </span>
           <h1>Welcome!</h1>

@@ -1,4 +1,5 @@
-function GameOverModal({ clickHandler }) {
+function GameOverModal(clickHandler) {
+  console.log(clickHandler.GameOverModal)
   function closeModal() {
     document.querySelector('#game-over-modal').style.display = 'none'
   }
@@ -13,7 +14,11 @@ function GameOverModal({ clickHandler }) {
           <p>Game Over</p>
           <p>stats</p>
           {/* why linting error */}
-          <button id="start-game" type="button" onClick={clickHandler}>
+          <button
+            id="start-game"
+            type="button"
+            onClick={clickHandler.GameOverModal}
+          >
             Bye
           </button>
           {/* <button id='start-game' type='button' onClick={clickHandler}>Play Again</button> */}
