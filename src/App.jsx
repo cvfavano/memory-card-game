@@ -2,14 +2,6 @@ import { useState, useEffect } from 'react'
 import WelcomeModal from './components/WelcomeModal'
 import GameOverModal from './components/GameOverModal.jsx'
 import Cards from './components/Cards.jsx'
-import PropTypes from 'prop-types'
-
-useWelcome.PropTypes = {
-  isWelcomeModal: PropTypes.bool.isRequired,
-  setWelcomeModal: PropTypes.bool.isRequired,
-  isGameOver: PropTypes.bool.isRequired,
-  setIsGameOver: PropTypes.bool.isRequired,
-}
 
 function usePokemonData() {
   const [pokemonList, setPokemonList] = useState([])
