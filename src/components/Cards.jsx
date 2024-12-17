@@ -6,11 +6,12 @@ import PropTypes from 'prop-types'
 Cards.propTypes = {
   data: PropTypes.array.isRequired,
   mode: PropTypes.number.isRequired,
-  gameStatus: PropTypes.func,
+  gameStatus: PropTypes.boolean,
+  endGame: PropTypes.func,
   // trackedPokemon: PropTypes.array.isRequired,
 }
 
-function Cards({ data, mode, gameStatus }) {
+function Cards({ data, mode, endGame, gameStatus }) {
   // console.log(gameStatus)
   //gameStatus calls endGame
   // ***** TODO *****
@@ -43,10 +44,11 @@ function Cards({ data, mode, gameStatus }) {
     return cards
   }
 
-  function gameOver() {
-    const cardsContainer = document.querySelector('.cards-container')
-    cardsContainer.style.display = 'none'
+  function gameOver(num) {
+    endGame()
     console.log(gameStatus)
+    console.log('GAME OVER')
+    console.log(num)
   }
 
   const displayCards = () => {
@@ -73,14 +75,9 @@ function Cards({ data, mode, gameStatus }) {
   const cardClickHandler = (event) => {
     setClickedPokemon((prevPokemon) => [...prevPokemon, event.target.value])
 
-    if (!clickedPokemon.includes(event.target.value)) {
-      displayCards()
-    } else {
-      console.log(event.target.value)
-      gameOver()
-      console.log('GAME OVER')
-      gameStatus
-    }
+    !clickedPokemon.includes(event.target.value)
+      ? displayCards()
+      : gameOver(event.target.value)
   }
   return (
     <>
