@@ -41,6 +41,7 @@ function useWelcome() {
   const [isWelcomeModal, setWelcomeModal] = useState(true)
 
   function startGame() {
+    document.querySelector('.container').style.display = 'block'
     document.querySelector('#score-container').style.display = 'block'
     document.querySelector('#welcome-modal').style.display = 'none'
     document.querySelector('#game-over-modal').style.display = 'none'
@@ -60,6 +61,7 @@ function useGameOver() {
   }
   const endGame = () => {
     setIsGameOver(true)
+    document.querySelector('.container').style.display = 'none'
     document.querySelector('.cards-container').style.display = 'none'
     document.querySelector('#game-over-modal').style.display = 'block'
     document.querySelector('#score-container').style.display = 'none'

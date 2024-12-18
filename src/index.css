@@ -22,6 +22,7 @@ set max widths/fix budging layout
   -moz-osx-font-smoothing: grayscale;
 }
 .container {
+  display: none;
   background: black;
 
   background: #333;
