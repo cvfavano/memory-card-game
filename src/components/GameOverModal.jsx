@@ -17,7 +17,7 @@ function GameOverModal({ clickHandler, score, restartGame }) {
           <span className="close-modal" onClick={clickHandler}>
             &times;
           </span>
-          <p>Game Over</p>
+          <h1>Game Over</h1>
           <p>{score} Points</p>
 
           <button id="start-game" type="button" onClick={restartGame}>

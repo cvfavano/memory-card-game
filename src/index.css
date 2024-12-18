@@ -81,6 +81,7 @@ button:focus-visible {
 }
 
 .modal-content {
+  max-width: 800px;
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
