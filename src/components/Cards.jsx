@@ -6,17 +6,21 @@ import PropTypes from 'prop-types'
 Cards.propTypes = {
   data: PropTypes.array.isRequired,
   mode: PropTypes.number.isRequired,
-  gameStatus: PropTypes.boolean,
+  score: PropTypes.number.isRequired,
+  gameStatus: PropTypes.bool,
+  addPoint: PropTypes.func,
   endGame: PropTypes.func,
   // trackedPokemon: PropTypes.array.isRequired,
 }
 
-function Cards({ data, mode, endGame, gameStatus }) {
+function Cards({ data, mode, endGame, gameStatus, score, setScore }) {
   // console.log(gameStatus)
   //gameStatus calls endGame
   // ***** TODO *****
 
   //fix css of button or figure out how to click div with nested elements and get div id
+
+  console.log(score)
   let cards = new Set()
   const [clickedPokemon, setClickedPokemon] = useState([])
 
@@ -75,9 +79,13 @@ function Cards({ data, mode, endGame, gameStatus }) {
   const cardClickHandler = (event) => {
     setClickedPokemon((prevPokemon) => [...prevPokemon, event.target.value])
 
-    !clickedPokemon.includes(event.target.value)
-      ? displayCards()
-      : gameOver(event.target.value)
+    if (!clickedPokemon.includes(event.target.value)) {
+      displayCards()
+      console.log('+1')
+      setScore()
+    } else {
+      gameOver(event.target.value)
+    }
   }
   return (
     <>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import WelcomeModal from './components/WelcomeModal'
 import GameOverModal from './components/GameOverModal.jsx'
 import Cards from './components/Cards.jsx'
+import Score from './components/Score.jsx'
 
 function usePokemonData() {
   const [pokemonList, setPokemonList] = useState([])
@@ -29,20 +30,23 @@ function usePokemonData() {
   return { pokemonList }
 }
 
-// function useScore() {
-//   const [score, setScore] = useState(0)
+function useScore() {
+  const [score, setScore] = useState(0)
 
-//   setScore(score + 1)
-//   return { score, setScore }
-// }
+  const addPoint = () => setScore((prevScore) => prevScore + 1)
+  return { score, addPoint }
+}
 
 function useWelcome() {
   const [isWelcomeModal, setWelcomeModal] = useState(true)
 
   function startGame() {
+    document.querySelector('#score-container').style.display = 'block'
     document.querySelector('#welcome-modal').style.display = 'none'
     document.querySelector('#game-over-modal').style.display = 'none'
     document.querySelector('.cards-container').style.display = 'flex'
+    document.querySelector('#score-container').style.display = 'flex'
+
     setWelcomeModal(false)
   }
   return { isWelcomeModal, startGame }
@@ -56,11 +60,9 @@ function useGameOver() {
   }
   const endGame = () => {
     setIsGameOver(true)
-    const cardsContainer = document.querySelector('.cards-container')
-    cardsContainer.style.display = 'none'
-
-    const gameOverModal = document.querySelector('#game-over-modal')
-    gameOverModal.style.display = 'block'
+    document.querySelector('.cards-container').style.display = 'none'
+    document.querySelector('#game-over-modal').style.display = 'block'
+    document.querySelector('#score-container').style.display = 'none'
   }
 
   return { toggleEndModal, endGame, isGameOver }
@@ -79,6 +81,7 @@ function App() {
   const { startGame } = useWelcome()
   const { pokemonList } = usePokemonData()
   const { mode, handleModeChange } = useMode()
+  const { score, addPoint } = useScore()
   const { endGame, toggleEndModal, isGameOver } = useGameOver()
 
   return (
@@ -86,15 +89,24 @@ function App() {
       <WelcomeModal clickHandler={startGame} onChange={handleModeChange} />
 
       {pokemonList.length && (
-        <Cards
-          data={pokemonList}
-          mode={mode}
-          endGame={endGame}
-          gameStatus={isGameOver}
-        />
+        <>
+          <Score score={score} />
+          <Cards
+            data={pokemonList}
+            mode={mode}
+            endGame={endGame}
+            gameStatus={isGameOver}
+            score={score}
+            setScore={addPoint}
+          />
+        </>
       )}
 
-      <GameOverModal clickHandler={toggleEndModal} restartGame={startGame} />
+      <GameOverModal
+        score={score}
+        clickHandler={toggleEndModal}
+        restartGame={startGame}
+      />
     </div>
   )
 }

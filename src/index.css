@@ -1,3 +1,9 @@
+/* 
+set max widths/fix budging layout
+  - might be caused by size of pokemon image files 
+
+*/
+
 :root {
   max-width: 1280px;
   margin: 0 auto;
@@ -27,7 +33,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -147,6 +152,9 @@ button:focus-visible {
 
 #welcome-modal select:focus-visible {
   outline: none;
+}
+#score-container {
+  display: none;
 }
 @media (prefers-color-scheme: light) {
   :root {

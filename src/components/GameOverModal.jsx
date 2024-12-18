@@ -2,10 +2,10 @@ import PropTypes from 'prop-types'
 
 GameOverModal.propTypes = {
   clickHandler: PropTypes.func.isRequired,
-  // mode: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
   restartGame: PropTypes.func,
 }
-function GameOverModal({ clickHandler, restartGame }) {
+function GameOverModal({ clickHandler, score, restartGame }) {
   // function closeModal() {
   //   document.querySelector('#game-over-modal').style.display = 'none'
   // }
@@ -18,7 +18,7 @@ function GameOverModal({ clickHandler, restartGame }) {
             &times;
           </span>
           <p>Game Over</p>
-          <p>stats</p>
+          <p>{score} Points</p>
 
           <button id="start-game" type="button" onClick={restartGame}>
             Play Again
