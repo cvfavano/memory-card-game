@@ -156,6 +156,18 @@ button:focus-visible {
 }
 #score-container {
   display: none;
+  margin: 0 0 40px;
+  max-width: 100%;
+}
+
+#score-container p {
+  margin: 0;
+  padding: 10px;
+  border: 7px solid white;
+  border-top: none;
+  border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
+  background: #000;
 }
 @media (prefers-color-scheme: light) {
   :root {
