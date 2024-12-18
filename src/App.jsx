@@ -89,7 +89,7 @@ function App() {
       <WelcomeModal clickHandler={startGame} onChange={handleModeChange} />
 
       {pokemonList.length && (
-        <>
+        <div className="container">
           <Score score={score} />
           <Cards
             data={pokemonList}
@@ -99,7 +99,7 @@ function App() {
             score={score}
             setScore={addPoint}
           />
-        </>
+        </div>
       )}
 
       <GameOverModal

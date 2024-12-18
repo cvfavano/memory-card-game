@@ -7,7 +7,7 @@ Score.PropTypes = {
 function Score({ score }) {
   return (
     <div id="score-container">
-      <p>Score: {score}</p>
+      <p>Score: {score} Points</p>
     </div>
   )
 }
