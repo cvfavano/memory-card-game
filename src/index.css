@@ -163,11 +163,12 @@ button:focus-visible {
 #score-container p {
   margin: 0;
   padding: 10px;
-  border: 7px solid white;
+  border: 3px solid white;
   border-top: none;
   border-bottom-left-radius: 9px;
   border-bottom-right-radius: 9px;
   background: #000;
+  text-align: center;
 }
 @media (prefers-color-scheme: light) {
   :root {
