@@ -34,7 +34,11 @@ function useScore() {
   const [score, setScore] = useState(0)
 
   const addPoint = () => setScore((prevScore) => prevScore + 1)
-  return { score, addPoint }
+  const resetScore = () => {
+    setScore(0)
+    console.log('yo')
+  }
+  return { score, addPoint, resetScore }
 }
 
 function useWelcome() {
@@ -55,7 +59,7 @@ function useWelcome() {
 
 function useGameOver() {
   const [isGameOver, setIsGameOver] = useState(false)
-
+  const { resetScore } = useScore()
   function toggleEndModal() {
     document.querySelector('#game-over-modal').style.display = 'none'
   }
@@ -83,7 +87,7 @@ function App() {
   const { startGame } = useWelcome()
   const { pokemonList } = usePokemonData()
   const { mode, handleModeChange } = useMode()
-  const { score, addPoint } = useScore()
+  const { score, addPoint, resetScore } = useScore()
   const { endGame, toggleEndModal, isGameOver } = useGameOver()
 
   return (
@@ -108,6 +112,7 @@ function App() {
         score={score}
         clickHandler={toggleEndModal}
         restartGame={startGame}
+        resetScore={resetScore}
       />
     </div>
   )

@@ -10,6 +10,7 @@ Cards.propTypes = {
   gameStatus: PropTypes.bool,
   addPoint: PropTypes.func,
   endGame: PropTypes.func,
+  setScore: PropTypes.func,
   // trackedPokemon: PropTypes.array.isRequired,
 }
 

@@ -4,12 +4,13 @@ GameOverModal.propTypes = {
   clickHandler: PropTypes.func.isRequired,
   score: PropTypes.number.isRequired,
   restartGame: PropTypes.func,
+  resetScore: PropTypes.func,
 }
-function GameOverModal({ clickHandler, score, restartGame }) {
-  // function closeModal() {
-  //   document.querySelector('#game-over-modal').style.display = 'none'
-  // }
-
+function GameOverModal({ clickHandler, score, restartGame, resetScore }) {
+  const handleReset = () => {
+    restartGame()
+    resetScore()
+  }
   return (
     <div>
       <div id="game-over-modal" className="modal">
@@ -20,10 +21,9 @@ function GameOverModal({ clickHandler, score, restartGame }) {
           <h1>Game Over</h1>
           <p>{score} Points</p>
 
-          <button id="start-game" type="button" onClick={restartGame}>
+          <button id="start-game" type="button" onClick={handleReset}>
             Play Again
           </button>
-          {/* <button id='start-game' type='button' onClick={clickHandler}>Play Again</button> */}
         </div>
       </div>
     </div>
