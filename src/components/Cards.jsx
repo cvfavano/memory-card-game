@@ -1,4 +1,4 @@
-// //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1000.png
+// //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1025.png
 //console.log(props.data[0]) //bulbasaur
 import { useState } from 'react'
 import PropTypes from 'prop-types'
@@ -70,7 +70,7 @@ function Cards({ data, mode, endGame, gameStatus, score, setScore }) {
               backgroundImage: `url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon}.png')`,
             }}
           >
-            {data[pokemon].name}
+            {data[pokemon - 1].name}
           </button>
         ))}
       </>
