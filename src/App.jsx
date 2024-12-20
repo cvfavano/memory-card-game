@@ -59,7 +59,7 @@ function useWelcome() {
 
 function useGameOver() {
   const [isGameOver, setIsGameOver] = useState(false)
-  const { resetScore } = useScore()
+
   function toggleEndModal() {
     document.querySelector('#game-over-modal').style.display = 'none'
   }
