@@ -21,7 +21,9 @@ function usePokemonData() {
         .then((response) => response.json())
         .then((response) => {
           localStorage.setItem('pokemon', JSON.stringify(response.results))
-          setPokemonList(localStorage.getItem('pokemon'))
+          const fooo = localStorage.getItem('pokemon')
+          const foo = JSON.parse(fooo)
+          setPokemonList(foo)
         })
         .catch((error) => console.log('error', error))
     }
@@ -36,7 +38,6 @@ function useScore() {
   const addPoint = () => setScore((prevScore) => prevScore + 1)
   const resetScore = () => {
     setScore(0)
-    console.log('yo')
   }
   return { score, addPoint, resetScore }
 }
@@ -89,7 +90,7 @@ function App() {
   const { mode, handleModeChange } = useMode()
   const { score, addPoint, resetScore } = useScore()
   const { endGame, toggleEndModal, isGameOver } = useGameOver()
-
+  console.log({ score, pokemonList, mode, isGameOver })
   return (
     <div>
       <WelcomeModal clickHandler={startGame} onChange={handleModeChange} />
